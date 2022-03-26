@@ -7,16 +7,19 @@ makeGalleryMarkup(galleryItems);
 
 function makeGalleryMarkup(galleryItems) {
     const galleryMarkup = galleryItems.map(({ preview, original, description }) => {
-        const item = document.createElement('a');
-        item.classList.add('gallery__item');
-        item.href = original;
+        const item = document.createElement('li');
+
+        const link = document.createElement('a');
+        link.classList.add('gallery__item');
+        link.href = original;
 
         const img = document.createElement('img');
         img.classList.add('gallery__image');
         img.src = preview;
         img.alt = description;
 
-        item.appendChild(img);
+        item.appendChild(link);
+        link.appendChild(img);
 
         return item;
     });

@@ -39,27 +39,17 @@ function onGalleryItemClick(evn) {
 
   instance = basicLightbox.create(`
     <img src="${evn.target.dataset.source}" width="800" height="600">
-`)
-
-  instance.show()
+`, {
+    onShow: (instance) => {document.addEventListener('keydown', onEscCloseGallery)},
+    onClose: (instance) => {document.removeEventListener('keydown', onEscCloseGallery)}
+});
   
-  addEcs();
-
+  instance.show();
 }
 
 function onEscCloseGallery(evn) {
   const ESC = 'Escape';
   if (evn.code === ESC) {
     instance.close()
-    removeEcs();
   }
-}
-
-
-function addEcs() {
-  document.addEventListener('keydown', onEscCloseGallery);
-}
-
-function removeEcs() {
-  document.removeEventListener('keydown', onEscCloseGallery);
 }
